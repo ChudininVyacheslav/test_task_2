@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from "react";
 import Post from "../Post/Post";
-import {useFetchAllPostsQuery} from "./../../redux/api/postApi";
+import {useFetchAllPostsQuery} from "../../redux/api/postApi";
 
-const Container = () => {
+const ContainerPost = () => {
   const rootRef = useRef();
   const [currentPostStart, setCurrentPostStart] = useState(0);
   const {data: posts, isLoading} = useFetchAllPostsQuery({
@@ -13,7 +13,7 @@ const Container = () => {
     return 150 * setCurrentPostStart;
   }
   function getBottomHeight() {
-    return 150 * setCurrentPostStart;
+    return 150 * (100 - (setCurrentPostStart + 1));
   }
 
   //   const [isMyFetching, setIsFetchingDown] = useState(false);
@@ -36,16 +36,27 @@ const Container = () => {
   //       setIsMyFetchingUp(false);
   //     }
   //   }, [isMyFetchingUp]);
-  function scrollHandler(e) {
-    console.log(1111);
-    setCurrentPostStart(Math.floor(e.target.scrollTop / 150));
+  function scrollHandlerDown() {
+    // console.log(e.target.scrollTop);
+    setCurrentPostStart(currentPostStart =>currentPostStart + 1);
+  }
+
+  function scrollHandlerUp() {
+    // console.log(e.target.scrollTop);
+    setCurrentPostStart(currentPostStart =>currentPostStart - 2);
   }
 
   useEffect(() => {
     const div = rootRef.current;
-    div.addEventListener("scroll", scrollHandler);
+    console.log(div);
+    div.addEventListener("scroll", (e) => {
+      // if(currentPostStart)
+      scrollHandlerDown(e);
+    });
     return () => {
-      div.removeEventListener("scroll", scrollHandler);
+      div.removeEventListener("wheel", (e) => {
+        scrollHandlerUp(e);
+      });
     };
   }, []);
   //     const scrollHandler = (e) => {
@@ -68,17 +79,21 @@ const Container = () => {
   //   };
   return (
     <div>
-      <div className="post__list">
-        <div style={{height: getTopHeight()}} ref={rootRef}></div>
+      <div ref={rootRef} className="post__list">
+        <div  style={{height: `${getTopHeight()}px`}}></div>
         {posts &&
           posts
-            .slice(currentPostStart, currentPostStart + 5 + 1)
-            .map((post) => <Post post={post} />)}
+            .slice(currentPostStart, currentPostStart + 7 + 1)
+            .map((post) => (
+              <div  key={post.id}>
+                <Post post={post} />
+              </div>
+            ))}
       </div>
-      <div style={{height: getBottomHeight()}} ref={rootRef}></div>
+      <div style={{height: `${getBottomHeight()}px`}}></div>
       {isLoading && <div>Загрузка данных</div>}
     </div>
   );
 };
 
-export default Container;
+export default ContainerPost;
