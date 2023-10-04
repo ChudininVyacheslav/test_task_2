@@ -1,0 +1,15 @@
+.wrapper {
+    margin: 0 auto;
+    width: 600px;
+}
+
+.post {
+    height: 150px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 20px;
+}
