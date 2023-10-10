@@ -12,4 +12,4 @@ export const postsApi = createApi({
   }),
 });
 
-export const {useGetPostsQuery } = postsApi;
+export const {useGetPostsQuery} = postsApi;

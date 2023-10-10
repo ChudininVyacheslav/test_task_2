@@ -1,4 +1,4 @@
-import { checkingText } from "./chekingText";
+import {checkingText} from "./chekingText";
 
 export function textUpperCase(posts, isState = false) {
   const dataPosts = posts.map((post) => {

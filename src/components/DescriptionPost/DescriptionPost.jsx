@@ -2,14 +2,14 @@ import React from "react";
 import {useGetPostsQuery} from "../../redux/api/postApi";
 import {Link, useLocation} from "react-router-dom";
 import styles from "./DescriptionPost.module.css";
-import { textUpperCase } from "../Post/textUpperCase";
+import {textUpperCase} from "../Post/textUpperCase";
 
 const DescriptionPost = () => {
   const {data = [], isLoading} = useGetPostsQuery();
   const getIdPost = useLocation();
   const idPost = getIdPost.state;
   const dataPost = textUpperCase(data);
-  const post = dataPost[idPost-1];
+  const post = dataPost[idPost - 1];
 
   return (
     <div key={post.id} className={styles.wrapper}>
