@@ -1,15 +1,25 @@
 .wrapper {
-    margin: 0 auto;
-    width: 600px;
+  margin: 0 auto;
+  width: 600px;
+  height: 200px;
+  margin-top: 50px;
 }
 
 .post {
-    /* height: 150px; */
-    margin: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .title {
-    font-size: 20px;
+  font-size: 20px;
 }
+
+.body {
+    margin-bottom: 20px;
+}
+
+.link {
+    margin-bottom: 20px;
+}
+
